@@ -30,11 +30,11 @@
 
 \author{Nik Erzetič}
 
-\newtheorem*{izrek}{Izrek}
-\newtheorem*{definicija}{Definicija}
-\newtheorem*{posledica}{Posledica}
-\newtheorem*{trditev}{Trditev}
-\newtheorem*{lema}{Lema}
+\newtheorem{izrek}{Izrek}
+\newtheorem{definicija}{Definicija}
+\newtheorem{posledica}{Posledica}
+\newtheorem{trditev}{Trditev}
+\newtheorem{lema}{Lema}
 
 \begin{document}
 	
@@ -42,7 +42,37 @@
 	
 	Uvod: zakaj pomembno, predstavil protokole za rezanje torte predstavljene v izvornem članku, definiral par pojmov, uporabno v računalništvu
 	
-	Kako razrezati kolač, da bo vsak otrok zadovoljen s svojim kosom? Kako razporediti hišna opravila, da se nihče ne bo pritoževal, češ da mora storiti več kot ostali? Kako razdeliti sporno ozemlje med sosednji državi? V tem članku bom podal štiri protokole, ki rešijo prva dva problema in ki so navdihnili protokole, s katerim se lahko odgovori na tretje vprašanje. Zapisal jih bom tako, kot so predstavljeni v članku An Envy-Free Cake Division Protocol \cite{brams-taylor} avtorjev Brams in Taylor. Ti protokoli so: \textit{razreži in izberi}, \textit{proporcionalni protokol za $n = 3$}, \textit{proporcionalni protokol za poljuben $n$} in \textit{protokol brez zavisti za $n = 3$}. V članku izvornem članku je opisan še \textit{protokol brez zavisti za poljuben $n$}, vendar ga ne bom podrobno opisal, ker je v mojih očeh za vsakdanje situacije nepraktičen.
+	Kako razrezati kolač, da bo vsak otrok zadovoljen s svojim kosom? Kako razporediti hišna opravila, da se nihče ne bo pritoževal, češ da mora storiti več kot ostali? Kako razdeliti sporno ozemlje med sosednji državi? V tem članku bom podal štiri protokole, ki rešijo prva dva problema in ki so navdihnili protokole, s katerim se lahko odgovori na tretje vprašanje. Zapisal jih bom tako, kot so predstavljeni v članku An Envy-Free Cake Division Protocol \cite{brams-taylor} avtorjev Brams in Taylor. Ti protokoli so: \textit{razreži in izberi}, \textit{proporcionalni protokol za $n = 3$}, \textit{proporcionalni protokol za poljuben $n$} in \textit{protokol brez zavisti za $n = 3$}. V članku izvornem članku je opisan še \textit{protokol brez zavisti za poljuben $n$}, vendar ga ne bom podrobneje opisal, ker je v mojih očeh za vsakdanje situacije nepraktičen.
+	
+	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil. Prav tako bom protokole zapisal v obliki psevdokode, prav tako kot ubesedeno.
+	
+	Preden začnem opisovati protokole, moram definirati nekaj pojmov. Prva od teh je - zdaj že velikokrat omenjena beseda - protokol. Sledita še dve definiciji o lastnostih protokolov - proporcionalnost in brez zavisti - ki sem ju prav tako že omenil v uvodnem odstavku.
+
+	\begin{definicija}
+		\textbf{Protokol} je interaktiven postopke, ki ga lahko zapišemo kot računalniški program in ki sodelujočim lahko postavlja vprašanja, ki spremenijo njegov končni izid.
+	\end{definicija}
+
+	\begin{definicija}
+		Protokol je \textbf{proporcionalen}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila vsaj $\frac{1}{n}$ kolača (glede na lasten kriterij).
+	\end{definicija}
+
+	Zapis pogoja iz definicije s kvantifikatorji izgleda takole:
+	
+	$$
+	\forall i \in \{1, 2, \ldots, n\}.\ \exists S_i: P \rightarrow P_i.\ V_i (P_i) \geq \frac{1}{n}
+	$$
+	
+	V zgornjem zapisu sem uporabil simbole, ki se jih bom posluževal tudi v nadaljevanju članka. Najprej je tu množica indeksov $\{1, 2, \ldots, n\}$, ki bi jo lahko kar enačili z množico igralcev. Sledi preslikava $S_i$, ki pomeni strategijo, s katero i-ti igralec pridobi kos kolača $P_i$. Nazadnje je tu še preslikava $V_i$, ki je kriterij i-tega igralca za določanje velikosti kosov torte.
+
+	\begin{definicija}
+		Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom. 
+	\end{definicija}
+
+	Pogoj protokola brez zavisti zapišem takole:
+	
+	$$
+	\forall i \in \{1, 2, \ldots, n\}.\ \exists S_i: P \rightarrow P_i.\ \forall j \in \{1, 2, \ldots, n\}.\ V_i (P_i) \geq V_i (P_j)
+	$$
 	
 	\begin{thebibliography}{5}
 		
