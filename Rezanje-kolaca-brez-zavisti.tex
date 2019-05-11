@@ -20,6 +20,8 @@
 
 \usepackage{array}
 \usepackage{multicol}
+\usepackage{enumerate}
+\usepackage{enumitem}
 
 \usepackage{booktabs}
 
@@ -36,7 +38,7 @@
 \newtheorem{trditev}{Trditev}
 \newtheorem{lema}{Lema}
 \newtheorem{protokol}{Protokol}
-\newenvironment{dokaz}{\paragraph{Dokaz:}}{\hfill$\square$}
+\newenvironment{dokaz}{\paragraph{Dokaz:}}{\hfill$\square$\\}
 
 \begin{document}
 	
@@ -113,6 +115,55 @@
 	
 		Torej je protokol razreži in razdeli proporcionalen in brez zavisti.
 	\end{dokaz}
+
+	Naslednji je \textit{proporcionalni protokol za $n = 3$} (proportional protocol for $n=3$). Razvil ga je Steinhauss med drugo svetovno vojno. Poteka pa tako:
+	
+	\begin{protokol}
+		Proporcionalni protokol za $n = 3$:
+		\begin{enumerate}
+			
+			\item Igralec 1 razreže kolač na 3 dele.
+			
+			\item Igralec 2 ne stori nič ali označi 2 kosa.
+			
+			\item[] Če igralec 2 ne stori nič:
+		
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos.
+			
+			\item \qquad Igralec 1 izbere kos.
+			
+			\item[] Če igralec 2 označi 2 kosa:
+
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 ne stori nič ali označi 2 kosa.
+			
+			\item[] \qquad Če igralec 3 ne stori nič:
+		
+			\setcounter{enumi}{3}
+			
+			\item \qquad \qquad Igralec 2 izbere kos.
+			
+			\item \qquad \qquad Igralec 3 izbere kos.
+			
+			\item \qquad \qquad Igralec 1 izbere kos.
+			
+			\item[] \qquad Če igralec 3 označi 2 kosa:
+
+			\setcounter{enumi}{3}
+			
+			\item \qquad \qquad Igralec 1 izbere kos, ki sta ga označila igralec 2 in igralec 3
+			
+			\item \qquad \qquad Preostala kosa se združita v nov kolač
+			
+			\item \qquad \qquad Protokol \textit{razreži in izberi} med igralcem 2 in igralcem 3
+			
+		\end{enumerate}
+	\end{protokol}
 	
 	\pagebreak
 	
