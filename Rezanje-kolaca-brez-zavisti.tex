@@ -46,9 +46,9 @@
 	
 	Uvod: zakaj pomembno, predstavil protokole za rezanje torte predstavljene v izvornem članku, definiral par pojmov, uporabno v računalništvu
 	
-	Kako razrezati kolač, da bo vsak otrok zadovoljen s svojim kosom? Kako razporediti hišna opravila, da se nihče ne bo pritoževal, češ da mora storiti več kot ostali? Kako razdeliti sporno ozemlje med sosednji državi? V tem članku bom podal štiri protokole, ki rešijo prva dva problema in ki so navdihnili protokole, s katerim se lahko odgovori na tretje vprašanje. Zapisal jih bom tako, kot so predstavljeni v članku An Envy-Free Cake Division Protocol \cite{brams-taylor} avtorjev Brams in Taylor. Ti protokoli so: \textit{razreži in izberi}, \textit{proporcionalni protokol za $n = 3$}, \textit{proporcionalni protokol za poljuben $n$} in \textit{protokol brez zavisti za $n = 3$}. V članku izvornem članku je opisan še \textit{protokol brez zavisti za poljuben $n$}, vendar ga ne bom podrobneje opisal, ker je v mojih očeh za vsakdanje situacije nepraktičen.
+	Kako razrezati kolač, da bo vsak otrok zadovoljen s svojim kosom? Kako razporediti hišna opravila, da se nihče ne bo pritoževal, češ da mora storiti več kot ostali? Kako razdeliti sporno ozemlje med sosednji državi? V tem članku bom podal štiri protokole, ki rešijo prva dva problema in ki so navdihnili protokole, s katerim se lahko odgovori na tretje vprašanje. Zapisal jih bom tako, kot so predstavljeni v članku An Envy-Free Cake Division Protocol \cite{brams-taylor} avtorjev Brams in Taylor. Ti protokoli so: \textit{razreži in izberi}, \textit{proporcionalni protokol za $n = 3$}, \textit{proporcionalni protokol za poljuben $n$} in \textit{protokol brez zavisti za $n = 3$}. V izvornem članku je opisan še \textit{protokol brez zavisti za poljuben $n$}, vendar ga ne bom podrobneje opisal, ker je v mojih očeh za vsakdanje situacije nepraktičen.
 	
-	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil.
+	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil. Prav tako bom postopek zapisal kot psevdokodo.
 	
 	Preden začnem opisovati protokole, moram definirati še nekaj pojmov. Prva od teh je - zdaj že velikokrat omenjena beseda - protokol. Sledita še dve definiciji o lastnostih protokolov - proporcionalnost in brez zavisti - ki sem ju prav tako že omenil v uvodnem odstavku.
 
@@ -78,17 +78,16 @@
 	\forall i \in \{1, 2, \ldots, n\}.\ \exists S_i: P \rightarrow P_i.\ \forall j \in \{1, 2, \ldots, n\}.\ V_i (P_i) \geq V_i (P_j)
 	$$
 	
-	Kot sem že zapisal, bom sledeče protokole predstavil brez optimalne strategije. V dokazih bom moral zato le to poiskati. Protokoli že po svoji definiciji igralcem ponujajo različne opcije, zato bodo dokazi v večini temeljili na obravnavi primerov.
+	Kot sem že zapisal, bom sledeče protokole predstavil s psevdokodo. V dokazih bom moral zato le poiskati optimalno strategijo in dokazati, da vsakega igralca privede do želenega rezultata. Protokoli že po svoji definiciji igralcem ponujajo različne opcije, zato bodo dokazi v večini temeljili na obravnavi primerov.
 	
 	Prvi protokol je \textit{razreži in razdeli} (cut-and-choose) za dva igralca. Ta protokol je hkrati proporcionalen in brez zavisti. Zgleda pa tako:
 	
-	\begin{protokol}
-		
+	\begin{protokol} 
+		\label{razrezi&razdeli}
 		Razreži in razdeli:
-		
 		\begin{enumerate}
 			
-			\item Igralec 1 kolač razreže na dva dela.
+			\item Igralec 1 kolač razreže na 2 dela.
 			
 			\item Igralec 2 izbere kos.
 			
@@ -98,7 +97,7 @@
 	\end{protokol}
 	
 	\begin{trditev}
-		Protokol razreži in razdeli je proporcionalen in brez zavisti.
+		Protokol \ref{razrezi&razdeli} je proporcionalen in brez zavisti.
 	\end{trditev}
 
 	\begin{dokaz}
@@ -119,6 +118,7 @@
 	Naslednji je \textit{proporcionalni protokol za $n = 3$} (proportional protocol for $n=3$). Razvil ga je Steinhauss med drugo svetovno vojno. Poteka pa tako:
 	
 	\begin{protokol}
+		\label{proporcionalni_3}
 		Proporcionalni protokol za $n = 3$:
 		\begin{enumerate}
 			
@@ -134,7 +134,7 @@
 			
 			\item \qquad Igralec 2 izbere kos.
 			
-			\item \qquad Igralec 1 izbere kos.
+			\item \qquad Igralec 1 dobi preostali kos.
 			
 			\item[] Če igralec 2 označi 2 kosa:
 
@@ -150,7 +150,7 @@
 			
 			\item \qquad \qquad Igralec 3 izbere kos.
 			
-			\item \qquad \qquad Igralec 1 izbere kos.
+			\item \qquad \qquad Igralec 1 dobi preostali kos.
 			
 			\item[] \qquad Če igralec 3 označi 2 kosa:
 
@@ -160,10 +160,96 @@
 			
 			\item \qquad \qquad Preostala kosa se združita v nov kolač
 			
-			\item \qquad \qquad Protokol \textit{razreži in izberi} med igralcem 2 in igralcem 3
+			\item \qquad \qquad Protokol \textbf{razreži in izberi} med igralcem 2 in igralcem 3
 			
 		\end{enumerate}
 	\end{protokol}
+
+	\begin{trditev}
+		Protokol \ref{proporcionalni_3} je proporcionalen.
+	\end{trditev}
+
+	\begin{dokaz}
+		Protokol z optimalno strategijo za vse tri igralce je sledeč:
+	\end{dokaz}
+
+	\begin{protokol}
+		\label{proporcionalni_n}
+		Proporcionalni protokol za poljuben $n$:
+		\begin{enumerate}
+			
+			\item Igralec 1 odreže kos od kolača.
+			
+			\item \begin{enumerate}
+							
+				\item[(1.)] Igralec 2 ne stori nič ali obreže odrezani kos.
+				
+				\item[] $\vdots$
+				
+				\item[(i.)] Igralec i ne stori nič ali obreže odrezani kos.
+				
+				\item[] $\vdots$
+				
+				\item[(n.)] Igralec n ne stori nič ali obreže odrezani kos.
+				
+			\end{enumerate}
+		
+			\item Zadnji igralec, ki je obrezal kos, ali igralec 1, če nihče ni obrezal kosa, prejme ta kos.
+			
+			\item Odrezke se združijo s kolačem.
+			
+			\item Koraki 1. - 4. se ponavljajo, dokler ne ostaneta dva igralca.
+			
+			\item Protokol \textbf{razreži in izberi} med preostalima igralcem.
+			
+		\end{enumerate}
+	\end{protokol}
+
+	\begin{trditev}
+		Protokol \ref{proporcionalni_n} je proporcionalen.
+	\end{trditev}
+
+	\begin{protokol}
+		\label{brez_zavisti}
+		Protokol brez zavisti za $n = 3$
+		\begin{enumerate}
+			
+			\item Igralec 1 razreže kolač na 3 dele.
+			
+			\item Igralec 2 ne stori nič ali obreže 1 kos.
+			
+			\item[] Če igralec 2 ne stori nič:
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+			
+			\item[] Če igralec 2 obreže 1 kos:
+			
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos. Če je na voljo, mora izbrati obrezani kos.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+			
+			\item \qquad Igralec 2 ali igralec 3, ki je prejel neobrezan kos, razreže odrezke na 3 dele.
+			
+			\item \qquad Igralec, ki je prejel obrezan kos, izbere kos.
+			
+			\item \qquad Igralec 1 izbere kos.
+			
+			\item \qquad Igralec, ki je razrezal odrezke, dobi preostali kos.
+			
+		\end{enumerate}
+	\end{protokol}
+	
+	\begin{trditev}
+		Protokol \ref{brez_zavisti} je brez zavisti.
+	\end{trditev}
 	
 	\pagebreak
 	
