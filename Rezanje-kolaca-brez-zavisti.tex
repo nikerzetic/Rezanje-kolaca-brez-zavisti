@@ -35,6 +35,8 @@
 \newtheorem{posledica}{Posledica}
 \newtheorem{trditev}{Trditev}
 \newtheorem{lema}{Lema}
+\newtheorem{protokol}{Protokol}
+\newenvironment{dokaz}{\paragraph{Dokaz:}}{\hfill$\square$}
 
 \begin{document}
 	
@@ -44,9 +46,9 @@
 	
 	Kako razrezati kolač, da bo vsak otrok zadovoljen s svojim kosom? Kako razporediti hišna opravila, da se nihče ne bo pritoževal, češ da mora storiti več kot ostali? Kako razdeliti sporno ozemlje med sosednji državi? V tem članku bom podal štiri protokole, ki rešijo prva dva problema in ki so navdihnili protokole, s katerim se lahko odgovori na tretje vprašanje. Zapisal jih bom tako, kot so predstavljeni v članku An Envy-Free Cake Division Protocol \cite{brams-taylor} avtorjev Brams in Taylor. Ti protokoli so: \textit{razreži in izberi}, \textit{proporcionalni protokol za $n = 3$}, \textit{proporcionalni protokol za poljuben $n$} in \textit{protokol brez zavisti za $n = 3$}. V članku izvornem članku je opisan še \textit{protokol brez zavisti za poljuben $n$}, vendar ga ne bom podrobneje opisal, ker je v mojih očeh za vsakdanje situacije nepraktičen.
 	
-	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil. Prav tako bom protokole zapisal v obliki psevdokode, prav tako kot ubesedeno.
+	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil.
 	
-	Preden začnem opisovati protokole, moram definirati nekaj pojmov. Prva od teh je - zdaj že velikokrat omenjena beseda - protokol. Sledita še dve definiciji o lastnostih protokolov - proporcionalnost in brez zavisti - ki sem ju prav tako že omenil v uvodnem odstavku.
+	Preden začnem opisovati protokole, moram definirati še nekaj pojmov. Prva od teh je - zdaj že velikokrat omenjena beseda - protokol. Sledita še dve definiciji o lastnostih protokolov - proporcionalnost in brez zavisti - ki sem ju prav tako že omenil v uvodnem odstavku.
 
 	\begin{definicija}
 		\textbf{Protokol} je interaktiven postopke, ki ga lahko zapišemo kot računalniški program in ki sodelujočim lahko postavlja vprašanja, ki spremenijo njegov končni izid.
@@ -68,11 +70,51 @@
 		Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom. 
 	\end{definicija}
 
-	Pogoj protokola brez zavisti zapišem takole:
+	Pogoj protokola brez zavisti zapišemo takole:
 	
 	$$
 	\forall i \in \{1, 2, \ldots, n\}.\ \exists S_i: P \rightarrow P_i.\ \forall j \in \{1, 2, \ldots, n\}.\ V_i (P_i) \geq V_i (P_j)
 	$$
+	
+	Kot sem že zapisal, bom sledeče protokole predstavil brez optimalne strategije. V dokazih bom moral zato le to poiskati. Protokoli že po svoji definiciji igralcem ponujajo različne opcije, zato bodo dokazi v večini temeljili na obravnavi primerov.
+	
+	Prvi protokol je \textit{razreži in razdeli} (cut-and-choose) za dva igralca. Ta protokol je hkrati proporcionalen in brez zavisti. Zgleda pa tako:
+	
+	\begin{protokol}
+		
+		Razreži in razdeli:
+		
+		\begin{enumerate}
+			
+			\item Igralec 1 kolač razreže na dva dela.
+			
+			\item Igralec 2 izbere kos.
+			
+			\item Igralec 1 dobi preostali kos.
+			
+		\end{enumerate}
+	\end{protokol}
+	
+	\begin{trditev}
+		Protokol razreži in razdeli je proporcionalen in brez zavisti.
+	\end{trditev}
+
+	\begin{dokaz}
+		Protokol z optimalno strategijo za oba igralca je sledeč:
+		\begin{enumerate}
+			
+			\item Igralec 1 razreže kolač $P$ na kosa $P_1$ in $P_2$, da velja $V_1 (P_1) = V_1 (P_2) = \frac{1}{2}$.
+			
+			\item Igralec 2 izbere kos $P_{i_1}$, da velja $V_2 (P_{i_1}) \geq V_2 (P_{i_2})$, kjer sta $i_1, i_2$ elementa $\{1, 2\}$ in $i_1 \neq i_2$. Ker je vsota $V_2 (P_{i_1}) + V_2 (P_{i_2} = 1$ in $V_2 (P_{i_1}) \geq V_2 (P_{i_2})$, je $V_2 (P_{i_1}) \geq \frac{1}{2}$. Torej strategija igralcu 2 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
+			
+			\item Igralec 1 dobi preostali kos $P_{i_2}$. Ker je $V_1 (P_1) = V_1 (P_2) = \frac{1}{2}$, je $V_1 (P_{i_2}) \geq \frac{1}{2}$ in $V_1 (P_{i_2}) \geq V_1 (P_{i_1})$. Torej strategija igralcu 1 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
+			
+		\end{enumerate}
+	
+		Torej je protokol razreži in razdeli proporcionalen in brez zavisti.
+	\end{dokaz}
+	
+	\pagebreak
 	
 	\begin{thebibliography}{5}
 		
