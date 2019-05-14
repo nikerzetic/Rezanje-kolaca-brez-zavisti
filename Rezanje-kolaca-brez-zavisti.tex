@@ -51,32 +51,32 @@
 	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil. Prav tako bom postopek zapisal kot psevdokodo.
 	
 	Preden začnem opisovati protokole, moram definirati še nekaj pojmov. Prva od teh je - zdaj že velikokrat omenjena beseda - protokol. Sledita še dve definiciji o lastnostih protokolov - proporcionalnost in brez zavisti - ki sem ju prav tako že omenil v uvodnem odstavku.
-
+	
 	\begin{definicija}
-		\textbf{Protokol} je interaktiven postopke, ki ga lahko zapišemo kot računalniški program in ki sodelujočim lahko postavlja vprašanja, ki spremenijo njegov končni izid.
+		Naj bo $X$ neprazna množica. Družino $\mathcal{M}$, $\mathcal{M} \subseteq \mathcal{P}(X)$, imenujemo \textbf{$\sigma$-algebra}, če velja:
+		\begin{itemize}
+			\item $X \in \mathcal{M}$
+			
+			\item $\forall E \in \mathcal{P}(X).\ E \in \mathcal{M} \Rightarrow E^C \in \mathcal{M}$ (zaprtost za komplemente)
+			
+			\item $\forall E_1, \ldots, E_n \in \mathcal{P}(X).\ E_1, \ldots, E_n \in \mathcal{M} \Rightarrow \bigcup_{i=1}^{n} E_i \in \mathcal{M}$ (zaprtost za končne unije)
+		\end{itemize}
+		Elementom $\sigma$-algebre rečemo \textbf{merljive množice}, paru $(X, \mathcal{M})$ pa \textbf{merljiv prostor}.
 	\end{definicija}
 
 	\begin{definicija}
-		Protokol je \textbf{proporcionalen}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila vsaj $\frac{1}{n}$ kolača (glede na lasten kriterij).
+		Naj bo $(X, \mathcal{M})$ merljiv prostor. Preslikava $V : \mathcal{M} \to [0, \infty]$ je \textbf{mera} na $\mathcal{M}$, če velja:
+		\begin{itemize}
+			\item $V(\emptyset) = 0$
+			\item če je $\{E_i\}_{i=1}^{\infty}$ zaporedje paroma disjunktnih merljivih množic, je potem $\mu(\cup_{i=1}^{\infty}E_i) = \sum_{i=1}^{\infty} \mu(E_i)$ ($\mu$ je števno aditivna)
+		\end{itemize}		
 	\end{definicija}
 
-	Zapis pogoja iz definicije s kvantifikatorji izgleda takole:
+	Vpeljati moram še nekaj pojmov, ki bi jih s težavo formalno definiral. Prav tako so na sledeč način definirano bolj intuitivno razumljivi.
 	
-	$$
-	\forall i \in \{1, 2, \ldots, n\}.\ \exists S_i: P \rightarrow P_i.\ V_i (P_i) \geq \frac{1}{n}
-	$$
+	\textbf{Protokol} je interaktiven postopek, ki ga lahko zapišemo kot računalniški program in ki sodelujočim lahko postavlja vprašanja, ki spremenijo njegov končni izid. Od algoritma se razlikuje ravno po izbirah igralcev, ki vplivajo na končni izid. Tako bi bila primer algoritma \textit{for zanka}, primer protokola pa barvanje platna v barvo, ki jo izbere uporabnik.
 	
-	V zgornjem zapisu sem uporabil simbole, ki se jih bom posluževal tudi v nadaljevanju članka. Najprej je tu množica indeksov $\{1, 2, \ldots, n\}$, ki bi jo lahko kar enačili z množico igralcev. Sledi preslikava $S_i$, ki pomeni strategijo, s katero i-ti igralec pridobi kos kolača $P_i$. Nazadnje je tu še preslikava $V_i$, ki je kriterij i-tega igralca za določanje velikosti kosov torte.
-
-	\begin{definicija}
-		Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom. 
-	\end{definicija}
-
-	Pogoj protokola brez zavisti zapišemo takole:
-	
-	$$
-	\forall i \in \{1, 2, \ldots, n\}.\ \exists S_i: P \rightarrow P_i.\ \forall j \in \{1, 2, \ldots, n\}.\ V_i (P_i) \geq V_i (P_j)
-	$$
+	Protokol je \textbf{proporcionalen}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila vsaj $\frac{1}{n}$ kolača (glede na lasten kriterij). Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom. 
 	
 	Kot sem že zapisal, bom sledeče protokole predstavil s psevdokodo. V dokazih bom moral zato le poiskati optimalno strategijo in dokazati, da vsakega igralca privede do želenega rezultata. Protokoli že po svoji definiciji igralcem ponujajo različne opcije, zato bodo dokazi v večini temeljili na obravnavi primerov.
 	
@@ -104,11 +104,11 @@
 		Protokol z optimalno strategijo za oba igralca je sledeč:
 		\begin{enumerate}
 			
-			\item Igralec 1 razreže kolač $P$ na kosa $P_1$ in $P_2$, da velja $V_1 (P_1) = V_1 (P_2) = \frac{1}{2}$.
+			\item Igralec 1 razreže kolač $P$ na kosa $P_1$ in $P_2$, da velja $\mu_1 (P_1) = V_1 (P_2) = \frac{1}{2}$.
 			
-			\item Igralec 2 izbere kos $P_{i_1}$, da velja $V_2 (P_{i_1}) \geq V_2 (P_{i_2})$, kjer sta $i_1, i_2$ elementa $\{1, 2\}$ in $i_1 \neq i_2$. Ker je vsota $V_2 (P_{i_1}) + V_2 (P_{i_2} = 1$ in $V_2 (P_{i_1}) \geq V_2 (P_{i_2})$, je $V_2 (P_{i_1}) \geq \frac{1}{2}$. Torej strategija igralcu 2 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
+			\item Igralec 2 izbere kos $P_{i_1}$, da velja $\mu_2 (P_{i_1}) \geq \mu_2 (P_{i_2})$, kjer sta $i_1, i_2$ elementa $\{1, 2\}$ in $i_1 \neq i_2$. Ker je vsota $\mu_2 (P_{i_1}) + \mu_2 (P_{i_2} = 1$ in $\mu_2 (P_{i_1}) \geq \mu_2 (P_{i_2})$, je $\mu_2 (P_{i_1}) \geq \frac{1}{2}$. Torej strategija igralcu 2 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
 			
-			\item Igralec 1 dobi preostali kos $P_{i_2}$. Ker je $V_1 (P_1) = V_1 (P_2) = \frac{1}{2}$, je $V_1 (P_{i_2}) \geq \frac{1}{2}$ in $V_1 (P_{i_2}) \geq V_1 (P_{i_1})$. Torej strategija igralcu 1 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
+			\item Igralec 1 dobi preostali kos $P_{i_2}$. Ker je $\mu_1 (P_1) = \mu_1 (P_2) = \frac{1}{2}$, je $\mu_1 (P_{i_2}) \geq \frac{1}{2}$ in $\mu_1 (P_{i_2}) \geq \mu_1 (P_{i_1})$. Torej strategija igralcu 1 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
 			
 		\end{enumerate}
 	
