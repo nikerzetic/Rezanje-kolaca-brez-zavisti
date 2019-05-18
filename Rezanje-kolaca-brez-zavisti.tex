@@ -44,8 +44,6 @@
 	
 	\maketitle
 	
-	Uvod: zakaj pomembno, predstavil protokole za rezanje torte predstavljene v izvornem članku, definiral par pojmov, uporabno v računalništvu
-	
 	Kako razrezati kolač, da bo vsak otrok zadovoljen s svojim kosom? Kako razporediti hišna opravila, da se nihče ne bo pritoževal, češ da mora storiti več kot ostali? Kako razdeliti sporno ozemlje med sosednji državi? V tem članku bom podal štiri protokole, ki rešijo prva dva problema in ki so navdihnili protokole, s katerim se lahko odgovori na tretje vprašanje. Zapisal jih bom tako, kot so predstavljeni v članku An Envy-Free Cake Division Protocol \cite{brams-taylor} avtorjev Brams in Taylor. Ti protokoli so: \textit{razreži in izberi}, \textit{proporcionalni protokol za $n = 3$}, \textit{proporcionalni protokol za poljuben $n$} in \textit{protokol brez zavisti za $n = 3$}. V izvornem članku je opisan še \textit{protokol brez zavisti za poljuben $n$}, vendar ga ne bom podrobneje opisal, ker je v mojih očeh za vsakdanje situacije nepraktičen.
 	
 	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil. Prav tako bom postopek zapisal kot psevdokodo.
@@ -78,7 +76,7 @@
 	
 	Protokol je \textbf{proporcionalen}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila vsaj $\frac{1}{n}$ kolača (glede na lasten kriterij). Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom. 
 	
-	Kot sem že zapisal, bom sledeče protokole predstavil s psevdokodo. V dokazih bom moral zato le poiskati optimalno strategijo in dokazati, da vsakega igralca privede do želenega rezultata. Protokoli že po svoji definiciji igralcem ponujajo različne opcije, zato bodo dokazi v večini temeljili na obravnavi primerov.
+	Kot sem že zapisal, bom sledeče protokole predstavil s psevdokodo. V dokazih bom moral zato le poiskati optimalno strategijo in dokazati, da vsakega igralca privede do želenega rezultata. Protokoli že po svoji definiciji igralcem ponujajo različne opcije, zato bodo dokazi v večini temeljili na obravnavi primerov. Prav tako bom v dokazih za proporcionalnost predpostavil, da mera celotnega kolača za vse igralce enaka $1$. 
 	
 	Prvi protokol je \textit{razreži in razdeli} (cut-and-choose) za dva igralca. Ta protokol je hkrati proporcionalen in brez zavisti. Zgleda pa tako:
 	
@@ -106,7 +104,7 @@
 			
 			\item Igralec 1 razreže kolač $P$ na kosa $P_1$ in $P_2$, da velja $\mu_1 (P_1) = V_1 (P_2) = \frac{1}{2}$.
 			
-			\item Igralec 2 izbere kos $P_{i_1}$, da velja $\mu_2 (P_{i_1}) \geq \mu_2 (P_{i_2})$, kjer sta $i_1, i_2$ elementa $\{1, 2\}$ in $i_1 \neq i_2$. Ker je vsota $\mu_2 (P_{i_1}) + \mu_2 (P_{i_2} = 1$ in $\mu_2 (P_{i_1}) \geq \mu_2 (P_{i_2})$, je $\mu_2 (P_{i_1}) \geq \frac{1}{2}$. Torej strategija igralcu 2 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
+			\item Igralec 2 izbere kos $P_{i_1}$, da velja $\mu_2 (P_{i_1}) \geq \mu_2 (P_{i_2})$, kjer sta $i_1, i_2$ različna elementa $\{1, 2\}$. Ker je vsota $\mu_2 (P_{i_1}) + \mu_2 (P_{i_2}) = 1$ in $\mu_2 (P_{i_1}) \geq \mu_2 (P_{i_2})$, je $\mu_2 (P_{i_1}) \geq \frac{1}{2}$. Torej strategija igralcu 2 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
 			
 			\item Igralec 1 dobi preostali kos $P_{i_2}$. Ker je $\mu_1 (P_1) = \mu_1 (P_2) = \frac{1}{2}$, je $\mu_1 (P_{i_2}) \geq \frac{1}{2}$ in $\mu_1 (P_{i_2}) \geq \mu_1 (P_{i_1})$. Torej strategija igralcu 1 zagotovi kos, ki je večji ali enak $\frac{1}{2}$ in večji ali enak ostalim kosom.
 			
@@ -170,8 +168,53 @@
 	\end{trditev}
 
 	\begin{dokaz}
-		Protokol z optimalno strategijo za vse tri igralce je sledeč:
+		Protokol \ref{proporcionalni_3} z optimalno strategijo za vse tri igralce je sledeč:
+		\begin{enumerate}
+			
+			\item Igralec 1 razreže kolač $P$ na kose $P_1$, $P_2$ in $P_3$, da velja $\mu_1 (P_1) = \mu_1 (P_2) = \mu_1 (P_3) = \frac{1}{3}$.
+			
+			\item Igralec 2 ne stori nič, če obstajata različna indeksa $i_1, i_2$ iz $\{1, 2, 3\}$, da velja $\mu_2 (P_{i_1}), \mu_2 (P_{i_2}) \geq \frac{1}{3}$, ali označi kosa $P_{i_1}$ in $P_{i_2}$, če sta $\mu_2 (P_{i_1}), \mu_2 (P_{i_2}) < \frac{1}{3}$ in $i_1$, $i_2$ različna indeksa.
+			
+			\item[] Predpostavimo, da je $\mu_2 (P_{i_1}), \mu_2 (P_{i_2}) \geq \frac{1}{3}$. Igralec 2 ne stori nič.
+			
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 izbere kos $P_{j_3}$, za katerega velja $\mu_3 (P_{j_3}) \geq \frac{1}{3}$. Tak kos obstaja, ker je $\mu_3 (P_{j_1}) + \mu_3 (P_{j_2}) + \mu_3 (P_{j_3}) = 1$ in so na voljo še vsi trije kosi. Torej strategija igralcu 3 zagotovi kos ki je večji ali enak $\frac{1}{3}$.
+			
+			\item \qquad Igralec 2 izbere kos $P_{j_2}$ iz $\{P_{i_1}, P_{i_2}\}$. Vsaj eden izmed teh kosov je še na voljo, saj igralec 3 izbral le en kos. Po predpostavki za kos $P_{j_2}$ velja $\mu_2 (P_{j_2}) \geq \frac{1}{3}$. Torej strategija igralcu 2 zagotovi kos ki je večji ali enak $\frac{1}{3}$.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+			
+			\item[] Če igralec 2 označi 2 kosa:
+			
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 ne stori nič ali označi 2 kosa.
+			
+			\item[] \qquad Če igralec 3 ne stori nič:
+			
+			\setcounter{enumi}{3}
+			
+			\item \qquad \qquad Igralec 2 izbere kos.
+			
+			\item \qquad \qquad Igralec 3 izbere kos.
+			
+			\item \qquad \qquad Igralec 1 dobi preostali kos.
+			
+			\item[] \qquad Če igralec 3 označi 2 kosa:
+			
+			\setcounter{enumi}{3}
+			
+			\item \qquad \qquad Igralec 1 izbere kos, ki sta ga označila igralec 2 in igralec 3
+			
+			\item \qquad \qquad Preostala kosa se združita v nov kolač
+			
+			\item \qquad \qquad Protokol \textbf{razreži in izberi} med igralcem 2 in igralcem 3
+			
+		\end{enumerate}
 	\end{dokaz}
+
+	V tem dokazu sem privzel, da je mera vseh igralcev tako določena, da je $\mu_1 (P) = \mu_2 (P) = \mu_3 (P) = 1$
 
 	\begin{protokol}
 		\label{proporcionalni_n}
@@ -208,6 +251,37 @@
 	\begin{trditev}
 		Protokol \ref{proporcionalni_n} je proporcionalen.
 	\end{trditev}
+
+	\begin{dokaz}
+		Protokol \ref{proporcionalni_n} z optimalno strategijo za vseh n igralcev je sledeč:
+		\begin{enumerate}
+			
+			\item Igralec 1 odreže kos od kolača.
+			
+			\item \begin{enumerate}
+				
+				\item[(1.)] Igralec 2 ne stori nič ali obreže odrezani kos.
+				
+				\item[] $\vdots$
+				
+				\item[(i.)] Igralec i ne stori nič ali obreže odrezani kos.
+				
+				\item[] $\vdots$
+				
+				\item[(n.)] Igralec n ne stori nič ali obreže odrezani kos.
+				
+			\end{enumerate}
+			
+			\item Zadnji igralec, ki je obrezal kos, ali igralec 1, če nihče ni obrezal kosa, prejme ta kos.
+			
+			\item Odrezke se združijo s kolačem.
+			
+			\item Koraki 1. - 4. se ponavljajo, dokler ne ostaneta dva igralca.
+			
+			\item Protokol \textbf{razreži in izberi} med preostalima igralcem.
+			
+		\end{enumerate}
+	\end{dokaz}
 
 	\begin{protokol}
 		\label{brez_zavisti}
@@ -250,6 +324,43 @@
 	\begin{trditev}
 		Protokol \ref{brez_zavisti} je brez zavisti.
 	\end{trditev}
+
+	\begin{dokaz}
+		Protokol \ref{brez_zavisti} z optimalno strategijo za vse tri igralce je sledeč:
+		\begin{enumerate}
+			
+			\item Igralec 1 razreže kolač na 3 dele.
+			
+			\item Igralec 2 ne stori nič ali obreže 1 kos.
+			
+			\item[] Če igralec 2 ne stori nič:
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+			
+			\item[] Če igralec 2 obreže 1 kos:
+			
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos. Če je na voljo, mora izbrati obrezani kos.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+			
+			\item \qquad Igralec 2 ali igralec 3, ki je prejel neobrezan kos, razreže odrezke na 3 dele.
+			
+			\item \qquad Igralec, ki je prejel obrezan kos, izbere kos.
+			
+			\item \qquad Igralec 1 izbere kos.
+			
+			\item \qquad Igralec, ki je razrezal odrezke, dobi preostali kos.
+			
+		\end{enumerate}
+	\end{dokaz}
 	
 	\pagebreak
 	
