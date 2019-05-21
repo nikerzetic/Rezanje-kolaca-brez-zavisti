@@ -48,7 +48,7 @@
 	
 	Definicije in protokoli v tem članku bodo skoraj povsem enaki tistim, ki jih najdemo v izvornem delu \cite{brams-taylor}. Protokoli, dokazi in zmagovalne strategije so v njem podani hkrati, jaz pa jih bom tu ločil. Prav tako bom postopek zapisal kot psevdokodo.
 	
-	Preden začnem opisovati protokole, moram definirati še nekaj pojmov. Prva od teh je - zdaj že velikokrat omenjena beseda - protokol. Sledita še dve definiciji o lastnostih protokolov - proporcionalnost in brez zavisti - ki sem ju prav tako že omenil v uvodnem odstavku.
+	Preden začnem opisovati protokole, moram definirati še nekaj pojmov. Pomembno vlogo v vseh protokolih bo igrala mera. Ta pojem intuitivno razumemo - gre za način vrednotenja, ki ga uporablja vsak izmed igralcev v protokolu deljenja. Vendar je mera pojem, ki ga definiramo na merljivem prostoru. Iz tega razloga bom najprej definiral $\sigma$-algebro.
 	
 	\begin{definicija}
 		Naj bo $X$ neprazna množica. Družino $\mathcal{M}$, $\mathcal{M} \subseteq \mathcal{P}(X)$, imenujemo \textbf{$\sigma$-algebra}, če velja:
@@ -74,11 +74,13 @@
 	
 	\textbf{Protokol} je interaktiven postopek, ki ga lahko zapišemo kot računalniški program in ki sodelujočim lahko postavlja vprašanja, ki spremenijo njegov končni izid. Od algoritma se razlikuje ravno po izbirah igralcev, ki vplivajo na končni izid. Tako bi bila primer algoritma \textit{for zanka}, primer protokola pa barvanje platna v barvo, ki jo izbere uporabnik.
 	
-	Protokol je \textbf{proporcionalen}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila vsaj $\frac{1}{n}$ kolača (glede na lasten kriterij). Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom. 
+	Protokol je \textbf{proporcionalen}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila vsaj $\frac{1}{n}$ kolača (glede na igralčevo mero). Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom. 
 	
 	Kot sem že zapisal, bom sledeče protokole predstavil s psevdokodo. V dokazih bom moral zato le poiskati optimalno strategijo in dokazati, da vsakega igralca privede do želenega rezultata. Protokoli že po svoji definiciji igralcem ponujajo različne opcije, zato bodo dokazi v večini temeljili na obravnavi primerov. Prav tako bom v dokazih za proporcionalnost predpostavil, da mera celotnega kolača za vse igralce enaka $1$. 
 	
-	Prvi protokol je \textit{razreži in razdeli} (cut-and-choose) za dva igralca. Ta protokol je hkrati proporcionalen in brez zavisti. Zgleda pa tako:
+	Preden se podam v opisovanje protokolov, bi rad namenil še nekaj besed \textbf{optimalni strategiji}. Ta vsakemu igralcu, ki se je drži, zagotovi primeren kos - proporcionalen ali brez zavisti. Če ji igralec ne sledi, bo na koncu prejel "slabši" kos, kot drugače. Z drugimi besedami - ne obstaja strategija, ki bi igralcu zagotovila boljši ko. 
+	
+	Zdaj pa k opisovanju protokolov. Prvi je \textit{razreži in razdeli} (cut-and-choose) za dva igralca. Ta protokol je hkrati proporcionalen in brez zavisti. Zgleda pa tako:
 	
 	\begin{protokol} 
 		\label{razrezi&razdeli}
@@ -337,38 +339,41 @@
 		Protokol \ref{brez_zavisti} z optimalno strategijo za vse tri igralce je sledeč:
 		\begin{enumerate}
 			
-			\item Igralec 1 razreže kolač na 3 dele.
+			\item Igralec 1 razreže kolač na dele $P_1$, $P_2$ in $P_3$, za katere velja $\mu_1 (P_1) = \mu_2 (P_2) = \mu_3 (P_3)$.
 			
-			\item Igralec 2 ne stori nič ali obreže 1 kos.
+			\item Igralec 2 ne stori nič, če obstajata kosa $P_{i_1}$ in $P_{i_2}$, da velja $\mu_2 (P_{i_1}), \mu_2 (P_{i_2}) \geq \mu_2 (P_1), \mu_2 (P_2), \mu_2 (P_3)$, ali obreže kos $P_{i_1}$, če velja $\mu_2 (P_{i_1}) > \mu_2 (P_{i_2}), \mu_2 (P_{i_3})$.
 			
-			\item[] Če igralec 2 ne stori nič:
+			\item[] Predpostavimo, da velja $\mu_2 (P_{i_1}), \mu_2 (P_{i_2}) \geq \mu_2 (P_1), \mu_2 (P_2), \mu_2 (P_3)$. Igralec 2 ne stori nič.
 			
-			\item \qquad Igralec 3 izbere kos.
+			\item \qquad Igralec 3 izbere kos $P_{j_3}$, za katerega velja $\mu_3 (P_{j_3}) \geq \mu_3 (P_1), \mu_3 (P_2), \mu_3 (P_3)$. Torej optimalna strategija igralcu 3 zagotovi kos, ki večji ali enak ostalim kosom.
 			
-			\item \qquad Igralec 2 izbere kos.
+			\item \qquad Igralec 2 izbere kos $P_{j_2}$, za katerega velja $\mu_2 (P_{j_2}) \geq \mu_2 (P_1), \mu_2 (P_2), \mu_2 (P_3)$. Po predpostavki obstajata dva taka kosa in igralec 3 je izbral največ enega. Torej optimalna strategija igralcu 2 zagotovi kos, ki večji ali enak ostalim kosom.
 			
-			\item \qquad Igralec 1 dobi preostali kos.
+			\item \qquad Igralec 1 dobi preostali kos $P_{j_1}$. Ker za vse tri kose velja $\mu_1 (P_1) = \mu_2 (P_2) = \mu_3 (P_3)$, optimalna strategija igralcu 1 zagotovi kos, ki je večji ali enak ostalim kosom.
 			
-			\item[] Če igralec 2 obreže 1 kos:
+			\item[] Predpostavimo, da velja $\mu_2 (P_{i_1}) > \mu_2 (P_{i_2}), \mu_2 (P_{i_3})$ Igralec 2 obreže kos $P_{i_1}$ tako, da sta vsaj dva kosa večja ali enaka ostalim. Odrezke označimo z $L$.
 			
 			\setcounter{enumi}{2}
 			
-			\item \qquad Igralec 3 izbere kos.
+			\item \qquad Igralec 3 izbere kos $P_{j_3}$, za katerega velja $\mu_3 (P_{j_3}) \geq \mu_3 (P_{i_1}), \mu_3 (P_{i_2}), \mu_3 (P_{i_3})$. Tak kos obstaja, ker so na voljo še vsi kosi.
 			
-			\item \qquad Igralec 2 izbere kos. Če je na voljo, mora izbrati obrezani kos.
+			\item \qquad Igralec 2 izbere kos $P_{j_2}$. Če je na voljo, mora izbrati obrezani kos. Zanj velja $\mu_2 (P_{j_2}) \geq \mu_2 (P_{i_1}), \mu_2 (P_{i_2}), \mu_2 (P_{i_3})$, ker je enega od kosov obrezal tako, da sta vsaj dva kosa večja ali enaka ostalim, in ker je igralec 3 izbral največ enega izmed teh kosov.
 			
-			\item \qquad Igralec 1 dobi preostali kos.
+			\item \qquad Igralec 1 dobi preostali kos $P_{j_1}$. Ta je večji ali enak ostalim kosom, ker velja $\mu_1 (P_1) = \mu_2 (P_2) = \mu_3 (P_3)$ in ker je obrezani kos manjši od prvotnega.
 			
-			\item \qquad Igralec 2 ali igralec 3, ki je prejel neobrezan kos, razreže odrezke na 3 dele.
+			\item \qquad Ker se ne glede na to, kdo izbere obrezan kos, lahko brez škode za splošnost predpostavimo, da ga je izbral igralec 3. Igralec 2 potem razreže odrezke $L$ na kose $L_1$, $L_2$ in $L_3$.
 			
-			\item \qquad Igralec, ki je prejel obrezan kos, izbere kos.
+			\item \qquad Igralec 3 izbere kos $L_{k_3}$, za katerega velja $\mu_N (L_{k_3}) \geq \mu_N (L_1), \mu_N (L_2), \mu_N (L_3)$. Ker je igralec izbral kos $P_{j_3}$, ki je večji ali enak ostalim, in odrezke $L_{k_3}$, ki so večji ali enaki ostalim, je njegov skupen kos $P_{j_3} \cup L_{k_3}$ večji ali enak ostalim kosom. Torej mu optimalna strategija zagotovi kos, ki je večji ali enak ostalim kosom.
 			
-			\item \qquad Igralec 1 izbere kos.
+			\item \qquad Igralec 1 izbere kos $L_{k_1}$, ki je večji ali enak drugemu preostalemu kosu $L_{k_2}$. Ker je $\mu_1 (P_1) = \mu_2 (P_2) = \mu_3 (P_3)$ in ker je igralec 3 vzel obrezan kos, je $P_{j_1} > P_{j_3} \cup L_{k_3}$. Torej optimalna strategija igralcu 1 zagotovi kos, ki je večji ali enak ostalim kosom.
 			
-			\item \qquad Igralec, ki je razrezal odrezke, dobi preostali kos.
+			\item \qquad Igralec 2 dobi preostali kos $L_{k_2}$. Ker je $P_{j_2}$ večji ali enak ostalim kosom in $L_{k_2}$ enak ostalim odrezkom, je njegov skupen kos $P_{j_3} \cup L_{k_3}$ večji ali enak ostalim kosom. Torej optimalna strategija igralcu 2 zagotovi kos, ki je večji ali enak ostalim kosom.
 			
 		\end{enumerate}
+		Torej je protokol brez zavisti za $n = 3$ brez zavisti.
 	\end{dokaz}
+
+	Na koncu želim še odgovoriti na vprašanja, ki sem jih zastavil na začetku članka. Kolač lahko med otroke pravično razdelimo z enim izmed protokolov za primerno število oseb. Najboljši za to bi bil zadnji protokol, pod pogojem, da kolač delimo med tri otroke. Prav tako lahko hišna opravila razdelimo z enim izmed zgornjih protokolov, če le zamenjamo \textit{večje ali enako} z \textit{manjše ali enako} in \textit{večje} z \textit{manjše}. Problem delitve zemlje je prvi zastavil Ted Hill leta 1983 \cite{hill}, rešitev pa je podal Anatole Beck \cite{beck} nekaj let za tem .
 	
 	\pagebreak
 	
@@ -378,6 +383,22 @@
 		Steven J. Brams, Alan D. Taylor
 		An Envy-Free Cake Division Protocol
 		\textit{The American Mathematical Monthly} \textbf{102} (1995), 9–18
+		
+		\bibitem{hill}
+		T. P. Hill 
+		Determining a Fair Border
+		\textit{The American Mathematical Monthly} \textbf{90} (1983), 438–442
+		
+		\bibitem{beck}
+		A. Beck 
+		Constructing a Fair Border
+		\textit{The American Mathematical Monthly} \textbf{94} (1987), 157–162
+		
+		\bibitem{sigma}
+		\textbf{Sigma-algebra}, dostop: \textit{http://wiki.fmf.uni-lj.si/wiki/Merljiv\_prostor}		
+		
+		\bibitem{mera}
+		\textbf{Mera}, dostop: \textit{http://wiki.fmf.uni-lj.si/wiki/Mera}
 		
 	\end{thebibliography}
 	
