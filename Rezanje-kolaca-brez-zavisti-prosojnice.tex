@@ -21,12 +21,11 @@
 \usepackage{array}
 \usepackage{multicol}
 \usepackage{enumerate}
-\usepackage{enumitem}
 
 \usepackage{booktabs}
 
 \usetheme{Berlin}
-\usecolortheme{dove}
+\usecolortheme{dolphin}
 %\useinnertheme[shadows]{rounded}
 %\useoutertheme{infolines}
 \beamertemplatenavigationsymbolsempty
@@ -49,22 +48,160 @@
 	\end{frame}
 
 	\section{Uvod}
+	
 	\subsection{Kazalo}
 	
 	\begin{frame}
-		\frametitle{Nalsov}
-		\tableofcontents
+		\frametitle{Kazalo}
+		\tableofcontents[pausesections]
 	\end{frame}
 
-	\section{Jedro}
-	\subsection{Protokol}
+	\section{Protokoli}
+	
+	\subsection{Razreži in razdeli}
 	
 	\begin{frame}
-	\frametitle{Nalsov}
-	Nekaj
+		\frametitle{Razreži in razdeli}
+		\begin{enumerate}
+			\item Igralec 1 kolač razreže na 2 dela.
+			
+			\item Igralec 2 izbere kos.
+			
+			\item Igralec 1 dobi preostali kos.
+		\end{enumerate}
 	\end{frame}
 
+	\subsection{Proporcionalni protok za $n = 3$}
+	
+	\begin{frame}
+		\frametitle{Proporcionalni protok za $n = 3$}
+		\begin{enumerate}
+			\item Igralec 1 razreže kolač na 3 dele.
+			
+			\item Igralec 2 ne stori nič ali označi 2 kosa.
+			
+			\item[] Če igralec 2 ne stori nič:
+			
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+			
+			\item[] Če igralec 2 označi 2 kosa:
+			
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 ne stori nič ali označi 2 kosa.
+			
+			\item[] \qquad Če igralec 3 ne stori nič:
+			
+			\setcounter{enumi}{3}
+			
+			\item \qquad \qquad Igralec 2 izbere kos.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{enumerate}			
+			\setcounter{enumi}{4}
+			
+			\item \qquad \qquad Igralec 3 izbere kos.
+			
+			\item \qquad \qquad Igralec 1 dobi preostali kos.
+			
+			\item[] \qquad Če igralec 3 označi 2 kosa:
+			
+			\setcounter{enumi}{3}
+			
+			\item \qquad \qquad Igralec 1 izbere kos, ki sta ga označila igralec 2 in igralec 3.
+			
+			\item \qquad \qquad Preostala kosa se združita v nov kolač.
+			
+			\item \qquad \qquad Protokol \textbf{razreži in izberi} med igralcem 2 in igralcem 3.
+		\end{enumerate}
+	\end{frame}
+
+	\subsection{Proporcionalni protokol za poljuben $n$}
+
+	\begin{frame}
+		\frametitle{Proporcionalni protokol za poljuben $n$}
+		\begin{enumerate}
+			\item Igralec 1 odreže kos od kolača.
+			
+			\item \begin{itemize}
+				
+				\item Igralec 2 ne stori nič ali obreže odrezani kos.
+				
+				\item[] $\vdots$
+				
+				\item Igralec i ne stori nič ali obreže odrezani kos.
+				
+				\item[] $\vdots$
+				
+				\item Igralec n ne stori nič ali obreže odrezani kos.
+				
+			\end{itemize}
+			
+			\item Zadnji igralec, ki je obrezal kos, ali igralec 1, če nihče ni obrezal kosa, prejme ta kos. 
+			
+			\item Odrezke se združijo s kolačem.
+			
+			\item Koraki 1. - 4. se ponavljajo, dokler ne ostaneta dva igralca.
+			
+			\item Protokol \textbf{razreži in izberi} med preostalima igralcem.
+		\end{enumerate}
+	\end{frame}
+
+	\subsection{Protokol brez zavisti za $n = 3$}
+
+	\begin{frame}
+		\frametitle{Protokol brez zavisti za $n = 3$}
+		\begin{enumerate}
+			\item Igralec 1 razreže kolač na 3 dele.
+			
+			\item Igralec 2 ne stori nič ali obreže 1 kos.
+			
+			\item[] Če igralec 2 ne stori nič:
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+			
+			\item[] Če igralec 2 obreže 1 kos:
+			
+			\setcounter{enumi}{2}
+			
+			\item \qquad Igralec 3 izbere kos.
+			
+			\item \qquad Igralec 2 izbere kos. Če je na voljo, mora izbrati obrezani kos.
+			
+			\item \qquad Igralec 1 dobi preostali kos.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{enumerate}			
+			\setcounter{enumi}{5}
+			
+			\item \qquad Igralec 2 ali igralec 3, ki je prejel neobrezan kos, razreže odrezke na 3 dele.
+			
+			\item \qquad Igralec, ki je prejel obrezan kos, izbere kos.
+			
+			\item \qquad Igralec 1 izbere kos.
+			
+			\item \qquad Igralec, ki je razrezal odrezke, dobi preostali kos.
+		\end{enumerate}
+	\end{frame}
+
+
+
 	\section{Zaključek}
+	
 	\subsection{Viri}
 	
 	\begin{frame}
