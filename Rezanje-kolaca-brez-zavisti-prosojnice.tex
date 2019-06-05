@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 
+\usepackage{wasysym}
 \usepackage{amssymb}
 \usepackage{amsmath,amsfonts}
 \usepackage{amsthm}
@@ -49,11 +50,52 @@
 
 	\section{Uvod}
 	
-	\subsection{Kazalo}
-	
 	\begin{frame}
 		\frametitle{Kazalo}
-		\tableofcontents[pausesections]
+		\tableofcontents
+	\end{frame}
+
+	\section{Definicije}
+	
+	\subsection{$\sigma$-algebra}
+	
+	\begin{frame}
+		\frametitle{$\sigma$-algebra}
+		\begin{definicija}
+			Naj bo $X$ neprazna množica. Družino $\mathcal{M}$, $\mathcal{M} \subseteq \mathcal{P}(X)$, imenujemo \textbf{$\sigma$-algebra}, če velja:
+			\begin{itemize}
+				\item $X \in \mathcal{M}$
+				
+				\item $\forall E \in \mathcal{P}(X).\ E \in \mathcal{M} \Rightarrow E^C \in \mathcal{M}$ (zaprtost za komplemente)
+				
+				\item $\forall E_1, \ldots, E_n \in \mathcal{P}(X).\ E_1, \ldots, E_n \in \mathcal{M} \Rightarrow \bigcup_{i=1}^{n} E_i \in \mathcal{M}$ (zaprtost za končne unije)
+			\end{itemize}
+			Elementom $\sigma$-algebre rečemo \textbf{merljive množice}, paru $(X, \mathcal{M})$ pa \textbf{merljiv prostor}.
+		\end{definicija}
+	\end{frame}
+
+	\subsection{Mera}
+
+	\begin{frame}
+		\frametitle{Mera}
+		\begin{definicija}
+			Naj bo $(X, \mathcal{M})$ merljiv prostor. Preslikava $\mu : \mathcal{M} \to [0, \infty]$ je \textbf{mera} na $\mathcal{M}$, če velja:
+			\begin{itemize}
+				\item $\mu(\emptyset) = 0$
+				\item če je $\{E_i\}_{i=1}^{\infty}$ zaporedje paroma disjunktnih merljivih množic, je potem $\mu(\cup_{i=1}^{\infty}E_i) = \sum_{i=1}^{\infty} \mu(E_i)$ ($\mu$ je števno aditivna)
+			\end{itemize}		
+		\end{definicija}
+	\end{frame}
+
+	\subsection{Protokol, proporcionalen protokol in protokol brez zavisti}
+	
+	\begin{frame}
+		\frametitle{Protokol, proporcionalen protokol in protokol brez zavisti}
+			\textbf{Protokol} je interaktiven postopek, ki ga lahko zapišemo kot računalniški program in ki sodelujočim lahko postavlja vprašanja, ki spremenijo njegov končni izid. \\\vspace{9pt}
+			\pause
+			Protokol je \textbf{proporcionalen}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila vsaj $\frac{1}{n}$ kolača (glede na igralčevo mero). Protokol je \textbf{brez zavisti}, če za vsakega igralca obstaja strategija, ki mu bo zagotovila kos, ki je večji ali enak ostalim kosom.	\\\vspace{9pt}
+			\pause
+			\textbf{Optimalna strategija.}
 	\end{frame}
 
 	\section{Protokoli}
@@ -89,7 +131,12 @@
 			\item \qquad Igralec 2 izbere kos.
 			
 			\item \qquad Igralec 1 dobi preostali kos.
-			
+		\end{enumerate}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Proporcionalni protok za $n = 3$}
+		\begin{enumerate}
 			\item[] Če igralec 2 označi 2 kosa:
 			
 			\setcounter{enumi}{2}
@@ -101,16 +148,18 @@
 			\setcounter{enumi}{3}
 			
 			\item \qquad \qquad Igralec 2 izbere kos.
-		\end{enumerate}
-	\end{frame}
-	
-	\begin{frame}
-		\begin{enumerate}			
+					
 			\setcounter{enumi}{4}
 			
 			\item \qquad \qquad Igralec 3 izbere kos.
 			
 			\item \qquad \qquad Igralec 1 dobi preostali kos.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Proporcionalni protok za $n = 3$}
+		\begin{enumerate}
 			
 			\item[] \qquad Če igralec 3 označi 2 kosa:
 			
@@ -171,6 +220,12 @@
 			\item \qquad Igralec 2 izbere kos.
 			
 			\item \qquad Igralec 1 dobi preostali kos.
+		\end{enumerate}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Protokol brez zavisti za $n = 3$}
+		\begin{enumerate}
 			
 			\item[] Če igralec 2 obreže 1 kos:
 			
@@ -181,11 +236,7 @@
 			\item \qquad Igralec 2 izbere kos. Če je na voljo, mora izbrati obrezani kos.
 			
 			\item \qquad Igralec 1 dobi preostali kos.
-		\end{enumerate}
-	\end{frame}
-	
-	\begin{frame}
-		\begin{enumerate}			
+					
 			\setcounter{enumi}{5}
 			
 			\item \qquad Igralec 2 ali igralec 3, ki je prejel neobrezan kos, razreže odrezke na 3 dele.
@@ -202,11 +253,10 @@
 
 	\section{Zaključek}
 	
-	\subsection{Viri}
-	
 	\begin{frame}
-		\frametitle{Nalsov}
-		Nekaj
+		\frametitle{Zaključek}
+		\centering \huge
+		Hvala za pozornost $\smiley$
 	\end{frame}
 
 \end{document}
